@@ -1,6 +1,6 @@
 {
-  "name": "@exps/exp-common",
-  "version": "1.0.1",
+  "name": "@taobooks/common",
+  "version": "1.0.0",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
