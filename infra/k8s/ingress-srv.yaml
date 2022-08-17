@@ -17,3 +17,10 @@ spec:
                 name: exp-auth-srv
                 port:
                   number: 3000
+          - path: /api/books/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: exp-books-srv
+                port:
+                  number: 3000

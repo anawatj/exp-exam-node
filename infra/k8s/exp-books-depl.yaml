@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: exp-auth-depl
+  name: exp-books-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: exp-auth
+      app: exp-books
   template:
     metadata:
       labels: 
-        app: exp-auth
+        app: exp-books
     spec:
       containers:
-        - name: exp-auth
-          image: anawatj/exp-auth
+        - name: exp-books
+          image: anawatj/exp-books
           env:
             - name: MONGO_URI
-              value: 'mongodb://exp-auth-mongo-srv:27017/auth'
+              value: 'mongodb://exp-books-mongo-srv:27017/books'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
@@ -28,12 +28,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: exp-auth-srv
+  name: exp-books-srv
 spec:
   selector:
-    app: exp-auth
+    app: exp-books
   ports:
-    - name: exp-auth
+    - name: exp-books
       protocol: TCP
       port: 3000
       targetPort: 3000
