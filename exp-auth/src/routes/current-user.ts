@@ -1,6 +1,6 @@
 import express from 'express';
-import { currentUser } from '../middlewares/current-user';
-import { requireAuth } from '../middlewares/require-auth';
+import { currentUser } from '@taobooks/common';
+import { requireAuth } from '@taobooks/common';
 
 const router = express.Router();
 
