@@ -9,6 +9,7 @@ export interface BookUpdatedEvent {
         author: String;
         description: String;
         price: Number;
+        qty: Number;
         userId: String;
     };
 }

@@ -10,6 +10,7 @@ export interface BookCreatedEvent {
         author:String,
         description:String,
         price:Number,
+        qty:Number,
         userId:String 
     };
 }
