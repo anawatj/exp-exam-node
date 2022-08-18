@@ -4,6 +4,7 @@ export interface BookCreatedEvent {
     subject:Subjects.BookCreated;
     data:{
         id: String ,
+        version: Number,
         isbn: String,
         title: String,
         author:String,
