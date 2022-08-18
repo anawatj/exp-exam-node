@@ -1,4 +1,4 @@
-import { BookCreatedEvent, Listener, OrderApprovedEvent, Subjects } from "@taobooks/common";
+import { Listener, OrderApprovedEvent, Subjects } from "@taobooks/common";
 import { Message } from "node-nats-streaming";
 import { Book } from "../../models/book";
 import { queueGroupName } from "./queue-group-name";
