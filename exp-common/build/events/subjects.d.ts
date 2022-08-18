@@ -1,4 +1,5 @@
 export declare enum Subjects {
     BookCreated = "books:created",
-    BookUpdated = "books:updated"
+    BookUpdated = "books:updated",
+    OrderApproved = "order:approved"
 }

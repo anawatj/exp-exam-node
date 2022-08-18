@@ -30,4 +30,5 @@ __exportStar(require("./events/base-publisher"), exports);
 __exportStar(require("./events/subjects"), exports);
 __exportStar(require("./events/book-created-event"), exports);
 __exportStar(require("./events/book-updated-event"), exports);
+__exportStar(require("./events/order-approved-event"), exports);
 __exportStar(require("./types/order-status"), exports);
