@@ -1,0 +1,1 @@
+export const queueGroupName = 'exp-books-service';

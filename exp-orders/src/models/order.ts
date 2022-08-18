@@ -8,7 +8,7 @@ interface OrderAttrs{
     orderStatus:OrderStatus,
     shipName:String ,
     shipAddress:String ,
-    items:[{bookId:String,price:Number}],
+    items:[{bookId:String,price:Number,qty:Number}],
     userId:String
 }
 interface OrderDoc extends mongoose.Document {
@@ -18,7 +18,7 @@ interface OrderDoc extends mongoose.Document {
     orderStatus:OrderStatus,
     shipName:String ,
     shipAddress:String ,
-    items:[{bookId:String,price:Number}],
+    items:[{bookId:String,price:Number,qty:Number}],
     userId:String,
     version:Number
 }

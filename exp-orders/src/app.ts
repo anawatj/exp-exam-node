@@ -9,6 +9,7 @@ import { indexOrderRouter } from './routes';
 import { showOrderRouter } from './routes/show';
 import { updateOrderRouter } from './routes/update';
 import { deleteOrderRouter } from './routes/delete';
+import { approveOrderRouter } from './routes/approve';
 
 const app = express();
 app.set('trust proxy', true);
@@ -26,6 +27,7 @@ app.use(indexOrderRouter);
 app.use(showOrderRouter);
 app.use(updateOrderRouter);
 app.use(deleteOrderRouter);
+app.use(approveOrderRouter);
 app.all('*', async (req, res,next) => {
   next(new NotFoundError());
 });

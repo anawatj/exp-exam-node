@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
+import { OrderApprovedListener } from './events/listeners/order-approved-listener';
 import { natsWrapper } from './nats-wrapper';
 
 
@@ -32,6 +33,7 @@ const start = async () => {
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+    new OrderApprovedListener(natsWrapper.client).listen();
     await mongoose.connect(process.env.MONGO_URI, {});
     console.log("Connected to MongoDb");
   } catch (err) {
