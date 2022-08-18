@@ -23,8 +23,8 @@ app.use(createBookRouter);
 app.use(showBookRouter);
 app.use(indexBookRouter);
 app.use(updateBookRouter);
-app.all('*', async (req, res) => {
-  throw new NotFoundError();
+app.all('*', async (req, res,next) => {
+  next(new NotFoundError());
 });
 app.use(errorHandler);
 export {app};

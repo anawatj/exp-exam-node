@@ -1,4 +1,4 @@
-import express ,{Request,Response} from 'express';
+import express ,{NextFunction, Request,Response} from 'express';
 import {body} from 'express-validator';
 import { validateRequest,NotFoundError,requireAuth,NotAuthorizedError } from '@taobooks/common';
 import { Book } from '../models/book';
@@ -22,24 +22,29 @@ requireAuth,
     .withMessage('price is not incorrect format')
 ],
 validateRequest,
-async(req:Request,res:Response)=>{
-    const book = await Book.findById(req.params.id);
-    if(!book){
-        throw new NotFoundError();
+async(req:Request,res:Response,next:NextFunction)=>{
+    try{
+        const book = await Book.findById(req.params.id);
+        if(!book){
+            throw new NotFoundError();
+        }
+        if(book.userId != req.currentUser!.id){
+            throw new NotAuthorizedError();
+        }
+        book.set({
+            isbn : req.body.isbn,
+            title  : req.body.title,
+            author : req.body.author,
+            description:req.body.description,
+            price: req.body.price ,
+            userId:req.currentUser!.id
+        });
+        await book.save();
+    
+        res.send(book);
+    }catch(err:any){
+        next(err)
     }
-    if(book.userId != req.currentUser!.id){
-        throw new NotAuthorizedError();
-    }
-    book.set({
-        isbn : req.body.isbn,
-        title  : req.body.title,
-        author : req.body.author,
-        description:req.body.description,
-        price: req.body.price ,
-        userId:req.currentUser!.id
-    });
-    await book.save();
-
-    res.send(book);
+   
 });
 export {router as updateBookRouter}
