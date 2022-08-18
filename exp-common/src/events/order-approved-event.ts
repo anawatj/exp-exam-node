@@ -4,6 +4,7 @@ export interface OrderApprovedEvent {
     subject:Subjects.OrderApproved;
     data:[{
         bookId:String ,
-        orderQty:Number
+        price:Number,
+        qty:Number
     }]
 }
