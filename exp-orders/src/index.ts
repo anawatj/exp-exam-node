@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import { app } from './app';
+import { BookCreateListener } from './events/listeners/book-created-listener';
+import { BookUpdatedListener } from './events/listeners/book-updated-listener';
 import { natsWrapper } from './nats-wrapper';
 
 
@@ -32,6 +34,9 @@ const start = async () => {
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new BookCreateListener(natsWrapper.client).listen();
+    new BookUpdatedListener(natsWrapper.client).listen();
     await mongoose.connect(process.env.MONGO_URI, {});
     console.log("Connected to MongoDb");
   } catch (err) {

@@ -21,7 +21,10 @@ requireAuth,
     .withMessage("author must be provided"),
     body('price')
     .isFloat({gt:0})
-    .withMessage('price is not incorrect format')
+    .withMessage('price is not incorrect format'),
+    body('qty')
+    .isInt({gt:0})
+    .withMessage("qty is not incorrect format")
 ],
 validateRequest,
 async(req:Request,res:Response,next:NextFunction)=>{
@@ -39,6 +42,7 @@ async(req:Request,res:Response,next:NextFunction)=>{
             author : req.body.author,
             description:req.body.description,
             price: req.body.price ,
+            qty: req.body.qty,
             userId:req.currentUser!.id
         });
         await book.save();
@@ -49,6 +53,7 @@ async(req:Request,res:Response,next:NextFunction)=>{
             author:book.author,
             description:book.description,
             price:book.price,
+            qty:book.qty,
             userId:book.userId,
             version:book.version
         });

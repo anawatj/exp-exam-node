@@ -7,6 +7,7 @@ interface BookAttrs{
     author: String,
     description:String ,
     price :Number,
+    qty:Number,
     userId: String 
 
 }
@@ -17,6 +18,7 @@ interface BookDoc extends mongoose.Document {
     author: String,
     description:String ,
     price :Number,
+    qty : Number,
     userId: String,
     version: Number,
     isReversed():Promise<Boolean>
@@ -49,6 +51,10 @@ const bookSchema = new  mongoose.Schema({
     price:{
         type: Number,
         required: true
+    },
+    qty:{
+        type: Number,
+        required:true
     },
     userId:{
         type: String ,

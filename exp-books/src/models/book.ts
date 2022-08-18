@@ -6,6 +6,7 @@ interface BookAttrs{
     author: string,
     description:string ,
     price :number,
+    qty : number ,
     userId: string 
 
 }
@@ -16,6 +17,7 @@ interface BookDoc extends mongoose.Document {
     author: string,
     description:string ,
     price :number,
+    qty : number,
     userId: string ,
     version: number
 }
@@ -41,6 +43,10 @@ const bookSchema = new  mongoose.Schema({
         required: false
     },
     price:{
+        type: Number,
+        required: true
+    },
+    qty:{
         type: Number,
         required: true
     },
