@@ -72,8 +72,8 @@ bookSchema.set('versionKey', 'version');
 bookSchema.plugin(updateIfCurrentPlugin);
 bookSchema.statics.findByEvent=(event: { id: string; version: number }) => {
     return Book.findOne({
-      _id: event.id,
-      version: event.version - 1,
+        _id: event.id,
+        version: event.version - 1,
     });
   };
 bookSchema.statics.build=(attr:BookAttrs)=>{

@@ -7,7 +7,7 @@ export class BookCreateListener extends Listener<BookCreatedEvent>{
     subject: Subjects.BookCreated = Subjects.BookCreated;
     queueGroupName = queueGroupName;
     async onMessage(data: BookCreatedEvent["data"], msg: Message) {
-        const { id, isbn, title, author, description, price,qty, userId } = data;
+        const { id,version, isbn, title, author, description, price,qty, userId } = data;
         const book = Book.build({
             id,
             isbn,

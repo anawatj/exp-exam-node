@@ -8,7 +8,7 @@ export class BookUpdatedListener extends Listener<BookUpdatedEvent>{
     queueGroupName=queueGroupName;
     async onMessage(data:BookUpdatedEvent["data"],msg:Message){
         const { id,version, isbn, title, author, description, price,qty, userId } = data;
-        const book =await Book.findByEvent({id,version});
+        const book =await Book.findOne({id});
         if(!book){
             throw new Error("book not found")
         }
