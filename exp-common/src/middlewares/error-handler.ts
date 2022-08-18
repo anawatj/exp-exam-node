@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { CustomError } from '../errors/custom-error';
+import { NotFoundError } from '../errors/not-found-error';
 
 export const errorHandler = (
   err: Error,
@@ -9,6 +10,9 @@ export const errorHandler = (
 ) => {
   if (err instanceof CustomError) {
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
+  }
+  if (err instanceof NotFoundError){
+    return res.status(err.statusCode).send({errors:err.serializeErrors()});
   }
 
   res.status(400).send({
