@@ -4,8 +4,8 @@ export interface OrderApprovedEvent {
     data: [
         {
             bookId: String;
-            price: Number;
-            qty: Number;
+            price: number;
+            qty: number;
         }
     ];
 }
