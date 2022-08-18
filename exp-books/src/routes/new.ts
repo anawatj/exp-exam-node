@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 
 import { requireAuth, validateRequest } from '@taobooks/common';
 import { Book } from '../models/book';
-
+import { BookCreatedPublisher } from '../events/publishers/book-created-publisher';
+import { natsWrapper } from "../nats-wrapper";
 const router = express.Router()
 router.post("/api/books",
 requireAuth,
@@ -35,6 +36,16 @@ async(req:Request,res:Response,next:NextFunction)=>{
             userId:req.currentUser!.id
         });
         await book.save();
+        await new BookCreatedPublisher(natsWrapper.client).publish({
+            id:book.id!,
+            isbn:book.isbn,
+            title:book.title,
+            author:book.author,
+            description:book.description,
+            price:book.price,
+            userId:book.userId
+
+        });
         res.status(201).send(book);
     }catch(err:any){
         next(err);

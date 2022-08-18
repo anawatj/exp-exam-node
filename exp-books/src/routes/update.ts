@@ -2,6 +2,8 @@ import express ,{NextFunction, Request,Response} from 'express';
 import {body} from 'express-validator';
 import { validateRequest,NotFoundError,requireAuth,NotAuthorizedError } from '@taobooks/common';
 import { Book } from '../models/book';
+import { BookUpdatedPublisher } from '../events/publishers/book-updated-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -40,6 +42,15 @@ async(req:Request,res:Response,next:NextFunction)=>{
             userId:req.currentUser!.id
         });
         await book.save();
+        await new BookUpdatedPublisher(natsWrapper.client).publish({
+            id:book.id!,
+            isbn:book.isbn,
+            title:book.title,
+            author:book.author,
+            description:book.description,
+            price:book.price,
+            userId:book.userId
+        });
     
         res.send(book);
     }catch(err:any){
