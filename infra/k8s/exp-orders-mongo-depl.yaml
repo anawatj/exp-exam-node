@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exp-orders-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exp-orders-mongo
+  template:
+    metadata:
+      labels:
+        app: exp-orders-mongo
+    spec:
+      containers:
+        - name: exp-orders-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: exp-orders-mongo-srv
+spec:
+  selector:
+    app: exp-orders-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

@@ -49,7 +49,8 @@ async(req:Request,res:Response,next:NextFunction)=>{
             author:book.author,
             description:book.description,
             price:book.price,
-            userId:book.userId
+            userId:book.userId,
+            version:book.version
         });
     
         res.send(book);
